@@ -1,0 +1,25 @@
+batchSize: 3
+delay: 200
+input:
+  type: csv
+  fields:
+  - name: employee_role
+  - name: salary_amount
+  - name: datetime_of_payment
+targets:
+- name: employee
+  dataName: salary
+  host: localhost
+  username: test
+  password: test
+  mode: update
+  fields:
+  - name: salary_amount # existing salary_amount data will be updated
+    type: decimal
+  - name: datetime_of_payment
+  - name: created_at
+    value: CURRENT_TIMESTAMP
+  - name: created_by
+    value: 'SALARY-UPDATER-SCRIPT'
+  - name: employee_role
+    filterQuery: true # if true then only update data with matched employee_role value in csv (become sql where clause)

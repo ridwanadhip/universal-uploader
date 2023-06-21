@@ -1,0 +1,5 @@
+.vscode/
+*.exe
+.checkpoint
+universal-uploader
+examples/hook/hook

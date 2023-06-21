@@ -1,0 +1,7 @@
+targets:
+  - type: mysql
+    name: test
+    dataName: testTable
+    host: test
+    username: $USERNAME$ # inject value with envar USERNAME
+    password: $PASSWORD$ # if envar is missing then set envar value as empty string

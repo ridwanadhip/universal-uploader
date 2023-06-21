@@ -1,0 +1,7 @@
+targets:
+  - type: mysql
+    name: test
+    dataName: test
+    host: test
+    username: test
+    password: test

@@ -1,0 +1,28 @@
+input:
+  type: csv
+  fields:
+    - name: csvcol1
+    - name: csvcol2
+    - name: col3
+    - name: col5
+      order: 3
+targets:
+  - type: mysql
+    name: test
+    host: localhost
+    username: root
+    password: root
+    dataName: newtable
+    mode: insert
+    fields:
+      - name: col1
+        type: integer
+        value: ^csvcol1^
+      - name: col2
+        value: ^csvcol2^
+        emptyAsNil: true
+      - name: col3
+      - name: col4
+        value: ''
+      - name: col5
+        valueIfEmpty: NIL

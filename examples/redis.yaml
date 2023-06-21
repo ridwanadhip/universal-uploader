@@ -1,0 +1,17 @@
+batchSize: 3
+delay: 100
+input:
+  fields:
+    - name: user_serial
+      trimSpaces: true
+targets:
+  - name: coupon_redis
+    type: redis
+    host: rg-coupon-api-stag-redis.statefulset.svc.cluster.local
+    fields:
+      - name: key
+        value: newcouponstatus:^user_serial^
+      - name: value
+        value: ok
+      - name: ttl
+        value: 30
