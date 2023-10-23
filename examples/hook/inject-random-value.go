@@ -34,11 +34,19 @@ func (h *injectRandomValueHook) OverrideFormattedFieldValue(metadata *hook.Proce
 	return originalValue, nil
 }
 
-func (h *injectRandomValueHook) Prepare(metadata *hook.ProcessorHookMetadata, index, batchSize int) error {
+func (h *injectRandomValueHook) PrepareBatch(metadata *hook.ProcessorHookMetadata, index, batchSize int) error {
 	return nil
 }
 
-func (h *injectRandomValueHook) CleanUp(metadata *hook.ProcessorHookMetadata, index, batchSize int, batchError error) error {
+func (h *injectRandomValueHook) CleanUpBatch(metadata *hook.ProcessorHookMetadata, index, batchSize int, batchError error) error {
+	return nil
+}
+
+func (h *injectRandomValueHook) Start() error {
+	return nil
+}
+
+func (h *injectRandomValueHook) Finish() error {
 	return nil
 }
 
