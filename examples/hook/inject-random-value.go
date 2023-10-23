@@ -42,6 +42,14 @@ func (h *injectRandomValueHook) CleanUpBatch(metadata *hook.ProcessorHookMetadat
 	return nil
 }
 
+func (h *injectRandomValueHook) Start() error {
+	return nil
+}
+
+func (h *injectRandomValueHook) Finish() error {
+	return nil
+}
+
 // the script part, this example script inject a column value with random string (with hardcoded prefix) before inserting the row to mysql
 func main() {
 	args := &config.Args{

@@ -17,6 +17,7 @@ type Uploader struct {
 	InputParser input.Parser
 	Processors  []processor.Processor
 	CheckPoint  *config.CheckPoint
+	procHook    hook.ProcessorHook
 }
 
 func NewUploader(args *config.Args, procHook hook.ProcessorHook) (res *Uploader, err error) {
@@ -60,6 +61,7 @@ func NewUploader(args *config.Args, procHook hook.ProcessorHook) (res *Uploader,
 		InputParser: inputParser,
 		Processors:  procs,
 		CheckPoint:  cfg.NewCheckPoint(),
+		procHook:    procHook,
 	}
 
 	if cfg.Args.ResumeFlag {
@@ -83,6 +85,13 @@ func (up *Uploader) Run() error {
 
 		if up.Config.Args.VerboseModeFlag {
 			fmt.Printf("[Check Point] %s\n", util.Jsonify(up.CheckPoint))
+		}
+	}
+
+	if up.procHook != nil {
+		err := up.procHook.Start()
+		if err != nil {
+			return err
 		}
 	}
 
@@ -134,6 +143,13 @@ func (up *Uploader) Run() error {
 		}
 
 		time.Sleep(time.Duration(up.Config.Delay) * time.Millisecond)
+	}
+
+	if up.procHook != nil {
+		err := up.procHook.Finish()
+		if err != nil {
+			return err
+		}
 	}
 
 	// TODO: implement exporting result file
