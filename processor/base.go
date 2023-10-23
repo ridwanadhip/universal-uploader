@@ -67,7 +67,7 @@ func (proc *Processor) Process(data [][]string, index int) error {
 
 	// perform batch prepartion here via hook
 	if proc.procHook != nil {
-		if err := proc.procHook.Prepare(md, index, len(data)); err != nil {
+		if err := proc.procHook.PrepareBatch(md, index, len(data)); err != nil {
 			return err
 		}
 	}
@@ -76,7 +76,7 @@ func (proc *Processor) Process(data [][]string, index int) error {
 
 	// perform batch clean up here via hook
 	if proc.procHook != nil {
-		if hookErr := proc.procHook.CleanUp(md, index, len(data), err); hookErr != nil {
+		if hookErr := proc.procHook.CleanUpBatch(md, index, len(data), err); hookErr != nil {
 			return hookErr
 		}
 	}

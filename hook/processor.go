@@ -9,8 +9,8 @@ type ProcessorHookMetadata struct {
 }
 
 type ProcessorHook interface {
-	Prepare(metadata *ProcessorHookMetadata, index, batchSize int) error
-	CleanUp(metadata *ProcessorHookMetadata, index, batchSize int, batchError error) error
+	PrepareBatch(metadata *ProcessorHookMetadata, index, batchSize int) error
+	CleanUpBatch(metadata *ProcessorHookMetadata, index, batchSize int, batchError error) error
 	OverrideBaseFieldValue(metadata *ProcessorHookMetadata, fieldID, originalValue string) (newValue string, err error)
 	OverrideFormattedFieldValue(metadata *ProcessorHookMetadata, fieldID, originalValue string) (newValue string, err error)
 }
